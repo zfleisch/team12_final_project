@@ -21,6 +21,22 @@
 {
   @apply bg-green-500 text-white;
 }
+.btn-red
+{
+  @apply bg-red-500 text-white;
+}
+.btn-orange
+{
+  @apply bg-orange-500 text-white;
+}
+.btn-nav
+{
+  @apply font-bold py-4 px-8;
+}
+.checkbox
+{
+  @apply py-2 px-4 rounded;
+}
 
 .App-header {
   background-color: #282c34;
