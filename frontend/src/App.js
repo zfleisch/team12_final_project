@@ -12,6 +12,9 @@ function App() {
   const [cards, setCards] = useState([]);
   const [deck, setDeck] = useState([]);
   const [viewer, setViewer] = useState(0);
+  const [updateImage, setUpdateImage] = useState(false);
+  const [updateCard, setUpdateCard] = useState([]);
+  const [newImage, setNewImage] = useState("");
   //const [filter, setFilter] = useState("");
 
   useEffect(() =>{
@@ -182,6 +185,73 @@ function App() {
     return;
   }
 
+  function updateSearch(id) {
+    console.log(id);
+    if(id >= 1 && id <= 449)
+    {
+      fetch("http://localhost:8081/Cards/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUpdateCard(data);
+      })
+      setUpdateImage(true);
+    }
+    else
+    {
+      console.log("Index out of bounds")
+    }
+  }
+
+  function updateCardImage()
+    {
+      const inputCard = {
+        colors: updateCard[0].colors,
+        identifiers: {
+          scryfallId: newImage
+        },
+        id: updateCard[0].id,
+      };
+      console.log(updateCard);
+      fetch("http://localhost:8081/Cards/image/" + updateCard[0].id, 
+      {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(inputCard)
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      setUpdateImage(false);
+      setNewImage("");
+      alert("Image updated");
+      getCards();
+      setViewer(0);
+    }
+
+    const showUpdateCard = updateCard.map((el) => (
+      <div key={el.id}>
+        <img src={el.identifiers.scryfallId} width={200} alt="images"/>
+      </div>
+    ));
+
+    const handleChange = (e) => {
+      setNewImage(e.target.value);
+    }
+
+    const updateButton = (
+      <div>
+        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700
+dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+dark:focus:ring-blue-500 dark:focus:border-blue-500" type="search" value={newImage} onChange={handleChange}/>
+        <button onClick={() => updateCardImage()}>Change Image</button>
+      </div>
+    );
+
   if(viewer === 0)
   {
     return (
@@ -240,6 +310,14 @@ function App() {
     return (
       <div>
         {navBar}
+        <div>
+          <h1>Sometimes we get older images without knowing!!</h1>
+          <h2>Use this page to update a specific cards image to the most recent printing</h2>
+          <h3>Find card to update</h3>
+          <input type="text" id="message" name="message" placeholder="id" onChange={(e) => updateSearch(e.target.value)}/>
+          {updateImage && showUpdateCard}
+          {updateImage && updateButton}
+        </div>
       </div>
     );
   }

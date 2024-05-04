@@ -145,3 +145,26 @@ app.delete("/Deck", async (req, res) => {
     res.status(500).send({ message: 'Internal Server Error' });
     }
 });
+
+app.put("/Cards/image/:id", async (req, res) => {
+    const id = Number(req.params.id);
+    const query = { "id": id };
+    await client.connect();
+    console.log("Card to Update :", id);
+    console.log(req.body);
+    const updateData = {
+        $set:{
+            "colors": req.body.colors,
+            "identifiers": req.body.identifiers,
+            "id": Number(req.body.id)
+        }
+    };
+    const options = { };
+    const results = await db.collection("Mtg").updateOne(query, updateData, options);
+    // If no document was found to update, you can choose to handle it by sending a 404 response
+    if (results.matchedCount === 0) {
+        return res.status(404).send({ message: 'Card not found' });
+    }
+    res.status(200);
+    res.send(results);
+});
