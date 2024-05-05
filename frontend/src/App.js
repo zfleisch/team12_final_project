@@ -15,7 +15,6 @@ function App() {
   const [updateImage, setUpdateImage] = useState(false);
   const [updateCard, setUpdateCard] = useState([]);
   const [newImage, setNewImage] = useState("");
-  //const [filter, setFilter] = useState("");
 
   useEffect(() =>{
     getCards();
@@ -43,8 +42,9 @@ function App() {
       alert("Your deck is full");
       return;
     }
+    console.log("Object print")
     console.log(object);
-    var index = (object.id - 1) % 20;
+    var index = ((object.id - 1) - lowerBound) % 20;
     console.log("Card at index");
     console.log(cards[index]);
     const deckPost = {
@@ -181,6 +181,7 @@ function App() {
     filter = char;
     lowerBoundEstablished = false;
     displayIndex = 0;
+    lowerBound = 0;
     getCards();
     return;
   }
