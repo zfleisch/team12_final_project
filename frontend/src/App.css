@@ -2,6 +2,118 @@
   text-align: center;
 }
 
+/* Global Styles */
+body {
+  background-color: #121212; /* Dark background for the whole page */
+  color: white; /* Light text for contrast */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern, readable font */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar Styles */
+.btn-nav {
+  background-color: #333; /* Darker grey for buttons */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-nav:hover {
+  background-color: #555; /* Lighten button on hover */
+}
+
+/* Card Display Styles */
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.flex div {
+  background: #1c1c1c; /* Slightly lighter dark background for cards */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 4px;
+  color: white;
+  background-color: #0066cc;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn-red {
+  background-color: #d32f2f;
+}
+
+.btn-red:hover {
+  background-color: #c62828;
+}
+
+.btn-green {
+  background-color: #2e7d32;
+}
+
+.btn-green:hover {
+  background-color: #1b5e20;
+}
+
+.btn-orange {
+  background-color: #f57c00;
+}
+
+.btn-orange:hover {
+  background-color: #ef6c00;
+}
+
+/* Input Styles */
+input[type="checkbox"], input[type="text"], input[type="search"] {
+  margin: 10px;
+  padding: 10px;
+  background: #333;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-right: 5px;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  .flex {
+      flex-direction: column;
+  }
+  .btn-nav {
+      width: 100%;
+  }
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -11,6 +123,31 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.btn
+{
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-green
+{
+  @apply bg-green-500 text-white;
+}
+.btn-red
+{
+  @apply bg-red-500 text-white;
+}
+.btn-orange
+{
+  @apply bg-orange-500 text-white;
+}
+.btn-nav
+{
+  @apply font-bold py-4 px-8;
+}
+.checkbox
+{
+  @apply py-2 px-4 rounded;
 }
 
 .App-header {
@@ -26,6 +163,35 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.info-container {
+  background-color: #f0f0f0; /* Light grey background */
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px; /* Limit the width to keep text readable */
+  margin: 20px auto; /* Centering the box */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+}
+
+.info-container h3 {
+  color: #333; /* Dark grey for headings */
+  border-bottom: 2px solid #ddd; /* Underline for section separation */
+  padding-bottom: 5px;
+}
+
+.info-container p {
+  color: #666; /* Dark grey for text */
+  line-height: 1.6; /* Increased line-height for readability */
+  margin: 10px 0; /* Spacing between paragraphs */
+}
+
+.info-container p:first-of-type {
+  margin-top: 0;
+}
+
+.info-container p:last-of-type {
+  margin-bottom: 0;
 }
 
 @keyframes App-logo-spin {
